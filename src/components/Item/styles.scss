@@ -1,11 +1,12 @@
 .item {
   background-color: #fff;
-  padding: var(--gap-16);
+  padding: 0 var(--gap-16);
 
   a {
     display: flex;
     gap: var(--gap-16);
     border-bottom: 1px solid var(--gray-100);
+    padding: var(--gap-16) 0;
   }
 
   img {
