@@ -1,5 +1,5 @@
 :root {
-  --max-width: 1100px;
+  --max-width: 1200px;
   --blue: #3483fa;
   --yellow: #ffe600;
   --black: #333333;
@@ -43,7 +43,11 @@ a {
 
 main {
   background-color: var(--gray-100);
-  height: 100vh;
+  height: 100%;
+}
+
+li {
+  list-style: none;
 }
 
 @media (prefers-color-scheme: dark) {
