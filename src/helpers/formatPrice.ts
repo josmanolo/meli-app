@@ -12,7 +12,7 @@ const currencyToLocale: Record<string, string> = {
 
 const formatPrice = (priceData: PriceData): string => {
   const { currency, amount, decimals } = priceData;
-  const locale = currencyToLocale[currency] || "en-US";
+  const locale = currencyToLocale[currency] || "es-AR";
 
   const options = {
     style: "currency",

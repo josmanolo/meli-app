@@ -23,12 +23,12 @@ interface ItemProps {
 }
 
 const Item = ({ details }: ItemProps) => {
-  const { title, price, picture, free_shipping } = details;
+  const { id, title, price, picture, free_shipping } = details;
   const formattedPrice = formatPrice(price);
 
   return (
     <li className="item">
-      <Link href={`/items/`}>
+      <Link href={`/items/${id}`}>
         <Image src={picture} alt={title} width={180} height={180} />
         <div className="item-content">
           <div className="main-info">
