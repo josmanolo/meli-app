@@ -5,10 +5,7 @@ import { NEW, NEW_TEXT, USED_TEXT } from "./constants";
 import Button from "@/ui/Button";
 import "./styles.scss";
 import { Metadata } from "next";
-
-interface ProductDetailProps {
-  params: { id: string };
-}
+import { ProductDetailProps } from "@/interfaces";
 
 const getItem = async (id: string) => {
   try {
