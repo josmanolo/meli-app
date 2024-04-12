@@ -1,0 +1,16 @@
+.meli-button {
+    background-color: var(--blue);
+    color: #fff;
+    border-radius: var(--b-radius);
+    padding: var(--gap-12);
+    border: 1px solid var(--blue);
+    font-size: var(--font-18);
+    width: 100%;
+    font-weight: 400;
+    transition: background-color .25s linear;
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--dark-blue);
+    }
+}
