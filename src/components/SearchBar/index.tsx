@@ -26,7 +26,7 @@ const SearchBar = () => {
     <header className="header">
       <form className="search-form" role="search" onSubmit={handleSubmit}>
         <div className="logo-container">
-          <Image src="/images/Logo_ML.png" alt="Mercado Libre Logo" width={53} height={36}/>
+          <Image src="/images/Logo_ML.png" alt="Logotipo de Mercado Libre" width={53} height={36}/>
         </div>
         <input
           type="text"
@@ -36,7 +36,7 @@ const SearchBar = () => {
           aria-label="Buscar"
           className={figtree.className}
         />
-        <button type="submit" aria-label="Boton Buscar">
+        <button type="submit" aria-label="Buscar">
           <Image src="/images/ic_Search.png" alt="Icono de busqueda" width={18} height={18} />
         </button>
       </form>
