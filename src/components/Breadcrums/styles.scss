@@ -1,0 +1,19 @@
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    padding: var(--gap-16) 0;
+    width: calc(100% / 12 * 10);
+    max-width: var(--max-width);
+    margin: 0 auto;
+  
+    .breadcrumb-item {
+      font-size: var(--font-14);
+      color: var(--gray-300); 
+  
+      &:not(:last-of-type)::after {
+        content: ">";
+        padding: 0 5px;
+      }
+    }
+  }
+  
