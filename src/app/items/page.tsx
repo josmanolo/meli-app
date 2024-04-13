@@ -1,6 +1,7 @@
 import Item from "@/components/Item";
 import "./styles.scss";
 import { Metadata } from "next";
+import Breadcrumbs from "@/components/Breadcrums";
 
 type Props = {
   params: { search: string };
@@ -28,13 +29,18 @@ export default async function ItemsPage({
     cache: "no-store",
   }).then((res) => res.json());
 
+  const { items, mostFrequentCategory } = results;
+
   return (
-    <div className="items-container">
-      <ul>
-        {results?.items?.map((result: any) => (
-          <Item key={result.id} details={result} />
-        ))}
-      </ul>
-    </div>
+    <>
+      <Breadcrumbs categories={[mostFrequentCategory]} />
+      <div className="items-container">
+        <ul>
+          {items?.map((result: any) => (
+            <Item key={result.id} details={result} />
+          ))}
+        </ul>
+      </div>
+    </>
   );
 }

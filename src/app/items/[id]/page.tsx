@@ -6,6 +6,7 @@ import Button from "@/ui/Button";
 import "./styles.scss";
 import { Metadata } from "next";
 import { ProductDetailProps } from "@/interfaces";
+import Breadcrumbs from "@/components/Breadcrums";
 
 const getItem = async (id: string) => {
   try {
@@ -37,32 +38,40 @@ export default async function ProductDetailPage({
   params,
 }: ProductDetailProps) {
   const itemDetails = await getItem(params.id);
-  const { title, price, picture, condition, description } = itemDetails.item;
+  const { title, price, picture, condition, description, categories_path } = itemDetails?.item;
 
   const formattedPrice = formatPrice(price);
   const itemCondition = condition === NEW ? NEW_TEXT : USED_TEXT;
 
+  console.log(itemDetails)
+
   return (
-    <div className="details-container" aria-labelledby="product-title">
-      <div className="item-info">
-        <Image
-          src={picture}
-          alt={`Imagen de ${title}`}
-          width={680}
-          height={680}
-          priority
-        />
-        <div className="item-details">
-          <span className="item-condition">{itemCondition}</span>
-          <h1 id="product-title">{title}</h1>
-          <span className="item-price">{formattedPrice}</span>
-          <Button text="Comprar" />
+    <>
+      <Breadcrumbs categories={categories_path} />
+      <div className="details-container" aria-labelledby="product-title">
+        <div className="item-info">
+          <Image
+            src={picture}
+            alt={`Imagen de ${title}`}
+            width={680}
+            height={680}
+            priority
+          />
+          <div className="item-details">
+            <span className="item-condition">{itemCondition}</span>
+            <h1 id="product-title">{title}</h1>
+            <span className="item-price">{formattedPrice}</span>
+            <Button text="Comprar" />
+          </div>
         </div>
+        <section
+          className="item-description"
+          aria-labelledby="description-title"
+        >
+          <h2 id="description-title">Descripción del producto</h2>
+          <p>{description}</p>
+        </section>
       </div>
-      <section className="item-description" aria-labelledby="description-title">
-        <h2 id="description-title">Descripción del producto</h2>
-        <p>{description}</p>
-      </section>
-    </div>
+    </>
   );
 }
