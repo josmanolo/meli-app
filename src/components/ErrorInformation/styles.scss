@@ -1,0 +1,20 @@
+.error-container {
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:calc(100vh - 92px) ;
+
+  h1 {
+    color: var(--error);
+    margin-bottom: 10px;
+    font-size: var(--font-46);
+  }
+
+  p {
+    color: var(--gray-500);
+    font-size: var(--font-28);
+    line-height: 1.6;
+  }
+}
