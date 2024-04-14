@@ -3,6 +3,7 @@
   --dark-blue: #1f4e96;
   --blue: #3483fa;
   --yellow: #ffe600;
+  --error: #de354c;
   --black: #333333;
   --gray-500: #666666;
   --gray-300: #999999;
@@ -47,8 +48,8 @@ a {
 
 main {
   background-color: var(--gray-100);
-  height: 100%;
-  padding-bottom: var(--gap-32);
+  min-height: calc(100vh - 60px);
+  box-sizing: border-box;
 }
 
 li {
