@@ -16,6 +16,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+const fetchResults = async (query: string) => {
+  try {
+    const response = await fetch(`http://localhost:3002/api/items?q=${query}`, {
+      cache: "no-store",
+    }).then((res) => res.json());
+
+    return response;
+  } catch (error) {
+    throw new Error("Error al obtener los resultados.");
+  }
+};
+
 export default async function ItemsPage({
   searchParams,
 }: {
@@ -25,9 +37,7 @@ export default async function ItemsPage({
 }) {
   const query = searchParams?.search || "";
 
-  const results = await fetch(`http://localhost:3002/api/items?q=${query}`, {
-    cache: "no-store",
-  }).then((res) => res.json());
+  const results = await fetchResults(query);
 
   const { items, mostFrequentCategory } = results;
 
