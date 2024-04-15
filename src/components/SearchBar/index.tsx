@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./styles.scss";
 import Image from "next/image";
 import { Figtree } from "next/font/google";
@@ -10,16 +10,20 @@ const figtree = Figtree({ subsets: ["latin"] });
 
 const SearchBar = () => {
   const [search, setSearch] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
     setSearch(event.target.value);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    router.push(`/items?search=${encodeURIComponent(search)}`);
+    if (search.trim() === "") {
+      inputRef.current?.focus(); 
+    } else {
+      router.push(`/items?search=${encodeURIComponent(search)}`);
+    }
   };
 
   return (
@@ -34,6 +38,7 @@ const SearchBar = () => {
           />
         </div>
         <input
+          ref={inputRef}
           type="text"
           value={search}
           onChange={handleInputChange}
@@ -44,7 +49,7 @@ const SearchBar = () => {
         <button type="submit" aria-label="Buscar">
           <Image
             src="/images/ic_Search@2x.png"
-            alt="Icono de busqueda"
+            alt="Icono de búsqueda"
             width={18}
             height={18}
           />
