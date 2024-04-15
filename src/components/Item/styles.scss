@@ -25,7 +25,7 @@
 
   .price-details {
     margin-bottom: var(--gap-32);
-    
+
     span {
       font-size: var(--font-24);
       margin-right: var(--gap-16);
@@ -42,6 +42,7 @@
   font-size: var(--font-12);
   color: var(--gray-500);
   flex-basis: 20%;
+  text-transform: capitalize;
 }
 
 @media screen and (max-width: 760px) {

@@ -23,7 +23,7 @@ const SearchBar = () => {
 
   return (
     <header className="header">
-      <form className="search-form" role="search" onSubmit={handleSubmit}>
+      <section className="search-form" role="search" onSubmit={handleSubmit}>
         <div className="logo-container">
           <Image
             src="/images/Logo_ML@2x.png"
@@ -48,7 +48,7 @@ const SearchBar = () => {
             height={18}
           />
         </button>
-      </form>
+      </section>
     </header>
   );
 };

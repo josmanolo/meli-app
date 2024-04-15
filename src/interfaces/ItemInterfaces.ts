@@ -11,6 +11,7 @@ interface Item {
   picture: string;
   condition: string;
   free_shipping: boolean;
+  city: string;
 }
 
 export interface ItemProps {

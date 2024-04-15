@@ -5,7 +5,8 @@ import formatPrice from "@/helpers/formatPrice";
 import { ItemProps } from "@/interfaces";
 
 const Item = ({ details }: ItemProps) => {
-  const { id, title, price, picture, free_shipping } = details;
+  
+  const { id, title, price, picture, free_shipping, city } = details;
   const formattedPrice = formatPrice(price);
 
   return (
@@ -34,7 +35,7 @@ const Item = ({ details }: ItemProps) => {
             <h2>{title}</h2>
           </div>
 
-          <span className="city-info">Ciudad</span>
+          <span className="city-info">{city}</span>
         </div>
       </Link>
     </li>
