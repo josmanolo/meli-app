@@ -2,12 +2,11 @@ import Item from "@/components/Item";
 import "./styles.scss";
 import { Metadata } from "next";
 import Breadcrumbs from "@/components/Breadcrums";
+import { ItemDetails, ItemResponse, MetadataProps } from "@/interfaces";
 
-type Props = {
-  params: { search: string };
-};
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: MetadataProps): Promise<Metadata> {
   const search = params.search;
 
   return {
@@ -16,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-const fetchResults = async (query: string) => {
+const fetchResults = async (query: string): Promise<ItemResponse> => {
   try {
     const response = await fetch(`http://localhost:3002/api/items?q=${query}`, {
       cache: "no-store",
@@ -45,11 +44,15 @@ export default async function ItemsPage({
     <>
       <Breadcrumbs categories={[mostFrequentCategory]} />
       <div className="items-container">
-        <ul>
-          {items?.map((result: any) => (
-            <Item key={result.id} details={result} />
-          ))}
-        </ul>
+        {!items ? (
+          <p>No hay resultados</p>
+        ) : (
+          <ul>
+            {items?.map((result: ItemDetails) => (
+              <Item key={result.id} details={result} />
+            ))}
+          </ul>
+        )}
       </div>
     </>
   );

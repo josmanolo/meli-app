@@ -4,10 +4,10 @@ import { NEW, NEW_TEXT, USED_TEXT } from "./constants";
 import Button from "@/ui/Button";
 import "./styles.scss";
 import { Metadata } from "next";
-import { ProductDetailProps } from "@/interfaces";
+import { ItemDetailResponse, ProductDetailProps } from "@/interfaces";
 import Breadcrumbs from "@/components/Breadcrums";
 
-const getItem = async (id: string) => {
+const getItem = async (id: string): Promise<ItemDetailResponse> => {
   try {
     const item = await fetch(`http://localhost:3002/api/items/${id}`, {
       cache: "no-store",
@@ -15,7 +15,7 @@ const getItem = async (id: string) => {
 
     return item;
   } catch (error) {
-    throw new Error("not found!");
+    throw new Error("Item not found!");
   }
 };
 
@@ -39,6 +39,7 @@ export async function generateMetadata({
 export default async function ProductDetailPage({
   params,
 }: ProductDetailProps) {
+
   const itemDetails = await getItem(params.id);
   const { title, price, picture, condition, description, categories_path } =
     itemDetails?.item;
