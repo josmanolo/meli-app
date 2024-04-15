@@ -13,6 +13,7 @@ const SearchBar = () => {
   const router = useRouter();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
     setSearch(event.target.value);
   };
 
@@ -23,7 +24,7 @@ const SearchBar = () => {
 
   return (
     <header className="header">
-      <section className="search-form" role="search" onSubmit={handleSubmit}>
+      <form className="search-form" role="search" onSubmit={handleSubmit}>
         <div className="logo-container">
           <Image
             src="/images/Logo_ML@2x.png"
@@ -48,7 +49,7 @@ const SearchBar = () => {
             height={18}
           />
         </button>
-      </section>
+      </form>
     </header>
   );
 };

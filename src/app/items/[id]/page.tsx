@@ -22,6 +22,7 @@ const getItem = async (id: string) => {
 export async function generateMetadata({
   params,
 }: ProductDetailProps): Promise<Metadata> {
+
   const itemDetails = await getItem(params.id);
 
   const { title, picture, description } = itemDetails.item;
@@ -54,8 +55,14 @@ export default async function ProductDetailPage({
             <Image
               src={picture}
               alt={`Imagen de ${title}`}
+              width={680}
+              height={680}
               priority
-              fill
+              style={{
+                width: '100%',
+                height: 'auto',
+              }}
+              sizes="100vw"
             />
           </div>
           <div className="item-details">

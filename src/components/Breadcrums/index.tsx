@@ -5,11 +5,12 @@ interface BreadcrumbProps {
   categories: string[];
 }
 
-const Breadcrumbs: React.FC<BreadcrumbProps> = ({ categories }) => {
+const Breadcrumbs = ({ categories }: BreadcrumbProps) => {
+
   return (
     <nav className="breadcrumbs">
-      {categories.map((category) => (
-        <span key={category} className="breadcrumb-item">
+      {categories.map((category, index) => (
+        <span key={`${category}-${index}`} className="breadcrumb-item">
           {category}
         </span>
       ))}
