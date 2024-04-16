@@ -44,8 +44,15 @@ const ProductDetailPage = async ({ params }: ProductDetailProps) => {
   const itemDetails = await getItem(params.id);
 
   const details = itemDetails?.item || [];
-  const { title, price, picture, condition, description, categories_path } =
-    details;
+  const {
+    title,
+    price,
+    picture,
+    condition,
+    description,
+    categories_path,
+    initial_quantity,
+  } = details;
 
   const formattedPrice = formatPrice(price);
   const itemCondition = condition === NEW ? NEW_TEXT : USED_TEXT;
@@ -69,7 +76,9 @@ const ProductDetailPage = async ({ params }: ProductDetailProps) => {
             />
           </div>
           <div className="item-details">
-            <span className="item-condition">{itemCondition}</span>
+            <p className="item-condition">{`${itemCondition} - ${initial_quantity} ${
+              initial_quantity > 1 ? "disponibles" : "disponible"
+            }`}</p>
             <h1 id="product-title">{title}</h1>
             <span className="item-price">{formattedPrice}</span>
             <Button text="Comprar" />

@@ -16,6 +16,7 @@ interface Item {
   free_shipping: boolean;
   description: string;
   categories_path: string[];
+  initial_quantity: number;
 }
 export interface ItemDetails {
   id: string;
