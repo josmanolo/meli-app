@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./styles.scss";
 import Image from "next/image";
 import { Figtree } from "next/font/google";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const figtree = Figtree({ subsets: ["latin"] });
 
@@ -12,7 +12,9 @@ const SearchBar = () => {
   
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
-  const [search, setSearch] = useState("");
+  const searchParams = useSearchParams().get("search");
+  const [search, setSearch] = useState(searchParams || "");
+
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
