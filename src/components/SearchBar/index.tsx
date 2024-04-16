@@ -5,6 +5,7 @@ import "./styles.scss";
 import Image from "next/image";
 import { Figtree } from "next/font/google";
 import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 const figtree = Figtree({ subsets: ["latin"] });
 
@@ -32,14 +33,14 @@ const SearchBar = () => {
   return (
     <header className="header">
       <form className="search-form" role="search" onSubmit={handleSubmit}>
-        <div className="logo-container">
+        <Link href="/" className="logo-container">
           <Image
             src="/images/Logo_ML@2x.png"
             alt="Logotipo de Mercado Libre"
             width={53}
             height={36}
           />
-        </div>
+        </Link>
         <input
           ref={inputRef}
           type="text"
