@@ -65,7 +65,6 @@ export default async function ProductDetailPage({
               priority
               style={{
                 width: "100%",
-                height: "auto",
               }}
               sizes="100vw"
             />
