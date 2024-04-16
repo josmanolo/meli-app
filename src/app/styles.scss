@@ -1,0 +1,20 @@
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  height: 100vh;
+  flex-direction: column;
+  padding-top: var(--gap-32);
+}
+
+.home-title {
+  flex-basis: 80%;
+  font-size: var(--font-46);
+  text-align: center;
+
+  span {
+    display: block;
+    font-weight: 500;
+  }
+}

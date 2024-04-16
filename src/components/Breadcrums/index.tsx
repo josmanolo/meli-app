@@ -7,6 +7,10 @@ interface BreadcrumbProps {
 
 const Breadcrumbs = ({ categories }: BreadcrumbProps) => {
 
+  if(!categories) {
+    return <p>No se encontraron las categorias</p>
+  }
+
   return (
     <nav className="breadcrumbs">
       {categories.map((category, index) => (

@@ -7,25 +7,29 @@ import { Metadata } from "next";
 import { ItemDetailResponse, ProductDetailProps } from "@/interfaces";
 import Breadcrumbs from "@/components/Breadcrums";
 
-const getItem = async (id: string): Promise<ItemDetailResponse> => {
+export const getItem = async (id: string): Promise<ItemDetailResponse> => {
   try {
-    const item = await fetch(`http://localhost:3002/api/items/${id}`, {
+    const response = await fetch(`http://localhost:3002/api/items/${id}`, {
       cache: "no-store",
     }).then((res) => res.json());
 
-    return item;
+    if (response.status === 404) {
+      throw new Error("No se encontro el producto");
+    }
+
+    return response;
   } catch (error) {
-    throw new Error("Item not found!");
+    throw error;
   }
 };
 
 export async function generateMetadata({
   params,
 }: ProductDetailProps): Promise<Metadata> {
-
   const itemDetails = await getItem(params.id);
 
-  const { title, picture, description } = itemDetails.item;
+  const details = itemDetails?.item || [];
+  const { title, picture, description } = details;
 
   return {
     title: `${title} - Mercado Libre`,
@@ -39,10 +43,10 @@ export async function generateMetadata({
 export default async function ProductDetailPage({
   params,
 }: ProductDetailProps) {
-
   const itemDetails = await getItem(params.id);
-  const { title, price, picture, condition, description, categories_path } =
-    itemDetails?.item;
+
+  const details = itemDetails?.item || [];
+  const { title, price, picture, condition, description, categories_path } = details;
 
   const formattedPrice = formatPrice(price);
   const itemCondition = condition === NEW ? NEW_TEXT : USED_TEXT;
@@ -60,8 +64,8 @@ export default async function ProductDetailPage({
               height={680}
               priority
               style={{
-                width: '100%',
-                height: 'auto',
+                width: "100%",
+                height: "auto",
               }}
               sizes="100vw"
             />

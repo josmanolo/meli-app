@@ -9,9 +9,10 @@ import { useRouter } from "next/navigation";
 const figtree = Figtree({ subsets: ["latin"] });
 
 const SearchBar = () => {
-  const [search, setSearch] = useState("");
+  
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const [search, setSearch] = useState("");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);

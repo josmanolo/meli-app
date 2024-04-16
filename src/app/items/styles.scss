@@ -3,4 +3,9 @@
   max-width: var(--max-width);
   margin: 0 auto;
   padding-bottom: var(--gap-32);
+
+  .no-results {
+    font-size: var(--font-24);
+    text-align: center;
+  }
 }

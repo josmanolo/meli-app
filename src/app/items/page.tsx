@@ -15,7 +15,7 @@ export async function generateMetadata({
   };
 }
 
-const fetchResults = async (query: string): Promise<ItemResponse> => {
+export const fetchResults = async (query: string): Promise<ItemResponse> => {
   try {
     const response = await fetch(`http://localhost:3002/api/items?q=${query}`, {
       cache: "no-store",
@@ -36,16 +36,18 @@ export default async function ItemsPage({
 }) {
   const query = searchParams?.search || "";
 
+  
   const results = await fetchResults(query);
-
   const { items, mostFrequentCategory } = results;
 
   return (
     <>
       <Breadcrumbs categories={[mostFrequentCategory]} />
       <div className="items-container">
-        {!items ? (
-          <p>No hay resultados</p>
+        {!items || items.length === 0 ? (
+          <p className="no-results">
+            No hay resultados, intenta con otro termino
+          </p>
         ) : (
           <ul>
             {items?.map((result: ItemDetails) => (

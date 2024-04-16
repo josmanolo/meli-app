@@ -7,6 +7,8 @@ const currencyToLocale: Record<string, string> = {
 };
 
 const formatPrice = (priceData: PriceData): string => {
+  if(!priceData) return "";
+
   const { currency, amount, decimals } = priceData;
   const locale = currencyToLocale[currency] || "es-AR";
 

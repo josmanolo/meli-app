@@ -12,6 +12,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "types": ["jest", "node"],
     "plugins": [
       {
         "name": "next"
@@ -21,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/SearchBar/__tests__/SearchBat.test.ts", "jest.setup.js", "src/app/items/__tests__/ItemsPage.test.jsx", "src/app/items/__tests__/ItemsPage.test.jsx", "src/app/items/[id]/__tests__/ProductDetailPage.test.jsx", "src/app/items/__tests__/ItemsPage.test.jsx", "src/app/items/__tests__/ItemsPage.test.jsx"],
   "exclude": ["node_modules"]
 }
