@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import { jest } from "@jest/globals";
 import ProductDetailPage, { generateMetadata, getItem } from "../page";
+import { ProductDetailProps } from "@/interfaces";
 
 global.fetch = jest.fn(
   () =>
@@ -99,5 +100,32 @@ describe("ProductDetailPage", () => {
         screen.getByRole("img", { name: /Imagen de Guitarra Fender/i })
       ).toBeInTheDocument();
     });
+  });
+});
+
+describe("ProductDetailPage Integration Test", () => {
+  it("Completes an scenario where data is fetched and then displayed", async () => {
+    render(
+      await ProductDetailPage({ params: { id: "1" } } as ProductDetailProps)
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText("Guitarra Fender")).toBeInTheDocument();
+      expect(
+        screen.getByText("Descripción de la Guitarra Fender")
+      ).toBeInTheDocument();
+      expect(screen.getByText("$1,000.00")).toBeInTheDocument();
+      expect(
+        screen.getByRole("img", { name: /Imagen de Guitarra Fender/i })
+      ).toHaveAttribute(
+        "src",
+        "/_next/image?url=%2Fpath%2Fto%2Fguitar.jpg&w=3840&q=75"
+      );
+    });
+
+    expect(global.fetch).toHaveBeenCalledWith(
+      `http://localhost:3002/api/items/1`,
+      expect.anything()
+    );
   });
 });
