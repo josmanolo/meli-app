@@ -1,7 +1,7 @@
 .loader {
   width: 4.8rem;
   height: 4.8rem;
-  border: .5rem solid var(--gray-500);
+  border: 0.5rem solid var(--gray-500);
   border-bottom-color: transparent;
   border-radius: 50%;
   display: inline-block;
@@ -9,7 +9,13 @@
   animation: rotation 1s linear infinite;
   margin: 0 auto;
   display: block;
-  
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 @keyframes rotation {
