@@ -2,8 +2,15 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { useRouter } from "next/navigation";
 import SearchBar from "..";
 
-jest.mock("next/navigation", () => ({
-  useRouter: jest.fn(),
+jest.mock('next/navigation', () => ({
+  useRouter: jest.fn(() => ({
+    push: jest.fn(),
+    pathname: '/test',
+    query: { search: "" }
+  })),
+  useSearchParams: () => {
+    return new URLSearchParams("search=example");
+  }
 }));
 
 describe("SearchBar Component", () => {
