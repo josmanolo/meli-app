@@ -6,13 +6,12 @@ interface BreadcrumbProps {
 }
 
 const Breadcrumbs = ({ categories }: BreadcrumbProps) => {
-
-  if(!categories) {
-    return <p>No se encontraron las categorias</p>
+  if (!categories || categories.length === 0) {
+    return <p>No se encontraron las categorias</p>;
   }
 
   return (
-    <nav className="breadcrumbs">
+    <nav aria-label="breadcrumb" className="breadcrumbs">
       {categories.map((category, index) => (
         <span key={`${category}-${index}`} className="breadcrumb-item">
           {category}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import "./styles.scss";
 import Image from "next/image";
 import { Figtree } from "next/font/google";
@@ -62,4 +62,4 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+export default React.memo(SearchBar);
