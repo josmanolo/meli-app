@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js Application for MercadoLibre Integration
 
-## Getting Started
+This project is a Next.js frontend designed to interact with an Express.js server backend that interfaces with the MercadoLibre API. It provides an interface for searching and viewing detailed information about items listed on MercadoLibre.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Search Functionality**: Users can search for items using a search bar, which queries the backend to retrieve items from MercadoLibre.
+- **Item Details**: Users can click on any item to view more detailed information about it, such as price, description, and category.
+- **Responsive Design**: The application is designed to be responsive, providing a good user experience on both desktop and mobile devices.
+- **Optimized Images**: Utilizes Next.js's Image component to optimize image loading.
+- **Localization**: Prices are formatted based on the item's currency and locale.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To get started with this frontend project, follow these steps:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. Clone the repository:
 
-## Learn More
+   `git clone https://github.com/josmanolo/meli-app.git`
 
-To learn more about Next.js, take a look at the following resources:
+2. Navigate to the project directory:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   `cd meli-app`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+3. Install dependencies:
 
-## Deploy on Vercel
+   `npm install`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Start the development server:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   `npm run dev`
+
+## Pages and Components
+
+- SearchBar: Form where users can input their search queries.
+- Home Page: Displays a the search bar.
+- Item Page: Shows detailed information about a specific item when clicked from the search results.
+- Breadcrumbs: Provides navigational links back to the search or home page based on the current item's category path.
+
+## API Interaction
+
+The frontend communicates with the backend via the following endpoints:
+
+- Search Items: GET `/api/items?query=<search_query>`
+- Get Item Details: GET `/api/items/:id`
+
+## Dependencies
+
+- Next.js: The React framework used for building the frontend. Version 14.1.4.
+- Sass: Used for writing modular and reusable CSS.
+
+## Development and Testing
+
+- ESLint: For linting and code quality.
+- Jest: A JavaScript testing framework used for unit and integration testing.
+- Testing Library: Utilities for testing React components.
+
+## Running the Application
+
+To run the application in production mode:
+
+`npm run build`
+
+`npm start`
+
+This will build the application for production and serve it using a Node.js server at the configured port.
