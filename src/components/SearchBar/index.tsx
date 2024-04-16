@@ -39,6 +39,7 @@ const SearchBar = () => {
             alt="Logotipo de Mercado Libre"
             width={53}
             height={36}
+            priority
           />
         </Link>
         <input
