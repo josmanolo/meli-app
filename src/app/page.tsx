@@ -1,7 +1,18 @@
+import Image from "next/image";
+import "./styles.scss";
+
 export default function SearchPage() {
   return (
-    <>
-      <h1>MELI SEARCH!</h1>
-    </>
+    <div className="home">
+      <Image
+        src="/images/Logo_ML_25.png"
+        alt="Logo de Mercado Libre"
+        width={225}
+        height={225}
+      />
+      <h2 className="home-title">
+        Mercado Libre <span>Busqueda de Productos</span>
+      </h2>
+    </div>
   );
 }
