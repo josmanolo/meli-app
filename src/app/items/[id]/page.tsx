@@ -23,9 +23,9 @@ export const getItem = async (id: string): Promise<ItemDetailResponse> => {
   }
 };
 
-export async function generateMetadata({
+export const generateMetadata = async ({
   params,
-}: ProductDetailProps): Promise<Metadata> {
+}: ProductDetailProps): Promise<Metadata> => {
   const itemDetails = await getItem(params.id);
 
   const details = itemDetails?.item || [];
@@ -38,15 +38,14 @@ export async function generateMetadata({
       images: [{ url: picture }],
     },
   };
-}
+};
 
-export default async function ProductDetailPage({
-  params,
-}: ProductDetailProps) {
+const ProductDetailPage = async ({ params }: ProductDetailProps) => {
   const itemDetails = await getItem(params.id);
 
   const details = itemDetails?.item || [];
-  const { title, price, picture, condition, description, categories_path } = details;
+  const { title, price, picture, condition, description, categories_path } =
+    details;
 
   const formattedPrice = formatPrice(price);
   const itemCondition = condition === NEW ? NEW_TEXT : USED_TEXT;
@@ -86,4 +85,6 @@ export default async function ProductDetailPage({
       </div>
     </>
   );
-}
+};
+
+export default ProductDetailPage;

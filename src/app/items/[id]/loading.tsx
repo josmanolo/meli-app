@@ -2,6 +2,8 @@
 
 import Loader from "@/ui/Loader";
 
-export default function Loading() {
+const Loading = () => {
   return <Loader />;
-}
+};
+
+export default Loading;

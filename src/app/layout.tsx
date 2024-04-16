@@ -7,14 +7,15 @@ const figtree = Figtree({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Mercado Libre",
-  description: "Encuentra los mejores productos en Mercado Libre. Busca y descubre una amplia variedad de artículos en todas las categorías.",
+  description:
+    "Encuentra los mejores productos en Mercado Libre. Busca y descubre una amplia variedad de artículos en todas las categorías.",
 };
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) => {
   return (
     <html lang="es">
       <body className={figtree.className}>
@@ -23,4 +24,6 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

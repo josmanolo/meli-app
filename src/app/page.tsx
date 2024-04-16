@@ -1,7 +1,7 @@
 import Image from "next/image";
 import "./styles.scss";
 
-export default function SearchPage() {
+const SearchPage = () => {
   return (
     <div className="home">
       <Image
@@ -15,4 +15,6 @@ export default function SearchPage() {
       </h2>
     </div>
   );
-}
+};
+
+export default SearchPage;

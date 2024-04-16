@@ -4,16 +4,16 @@ import { Metadata } from "next";
 import Breadcrumbs from "@/components/Breadcrums";
 import { ItemDetails, ItemResponse, MetadataProps } from "@/interfaces";
 
-export async function generateMetadata({
+export const generateMetadata = async ({
   params,
-}: MetadataProps): Promise<Metadata> {
+}: MetadataProps): Promise<Metadata> => {
   const search = params.search;
 
   return {
     title: `Mercado Libre - Resultados para ${search}`,
     description: `Encuentra los mejores productos para ${search} en Mercado Libre.`,
   };
-}
+};
 
 export const fetchResults = async (query: string): Promise<ItemResponse> => {
   try {
@@ -27,16 +27,15 @@ export const fetchResults = async (query: string): Promise<ItemResponse> => {
   }
 };
 
-export default async function ItemsPage({
+const ItemsPage = async ({
   searchParams,
 }: {
   searchParams?: {
     search?: string;
   };
-}) {
+}) => {
   const query = searchParams?.search || "";
 
-  
   const results = await fetchResults(query);
   const { items, mostFrequentCategory } = results;
 
@@ -59,3 +58,4 @@ export default async function ItemsPage({
     </>
   );
 }
+ export default ItemsPage;
