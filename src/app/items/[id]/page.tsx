@@ -63,17 +63,21 @@ const ProductDetailPage = async ({ params }: ProductDetailProps) => {
       <div className="details-container" aria-labelledby="product-title">
         <div className="item-info">
           <div className="image-container">
-            <Image
-              src={picture}
-              alt={`Imagen de ${title}`}
-              width={680}
-              height={680}
-              priority
-              style={{
-                width: "100%",
-              }}
-              sizes="100vw"
-            />
+            {picture ? (
+              <Image
+                src={picture}
+                alt={`Imagen de ${title}`}
+                width={680}
+                height={680}
+                priority
+                style={{
+                  width: "100%",
+                }}
+                sizes="100vw"
+              />
+            ) : (
+              <div>Imagen no disponible</div>
+            )}
           </div>
           <div className="item-details">
             <p className="item-condition">{`${itemCondition} - ${initial_quantity} ${

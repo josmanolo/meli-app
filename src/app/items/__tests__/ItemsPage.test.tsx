@@ -13,21 +13,34 @@ jest.mock("next/router", () => ({
   },
 }));
 
-global.fetch = jest.fn(() =>
-  Promise.resolve({
-    json: () =>
-      Promise.resolve({
-        items: [
-          {
-            id: "1",
-            title: "Sample Item",
-            price: { amount: 1000, currency: "USD" },
-            picture: "/path/to/image.jpg",
-          },
-        ],
-        mostFrequentCategory: "Sample Category",
-      }),
-  })
+global.fetch = jest.fn(
+  () =>
+    Promise.resolve({
+      ok: true,
+      status: 200,
+      statusText: "OK",
+      headers: new Headers(),
+      redirected: false,
+      type: "default",
+      url: "",
+      text: () => Promise.resolve(""),
+      blob: () => Promise.resolve(new Blob()),
+      clone: () => this,
+      body: null,
+      bodyUsed: false,
+      json: () =>
+        Promise.resolve({
+          items: [
+            {
+              id: "1",
+              title: "Sample Item",
+              price: { amount: 1000, currency: "USD" },
+              picture: "/path/to/image.jpg",
+            },
+          ],
+          mostFrequentCategory: "Sample Category",
+        }),
+    }) as unknown as Promise<Response>
 );
 
 describe("generateMetadata", () => {
@@ -35,9 +48,7 @@ describe("generateMetadata", () => {
     const metadata = await generateMetadata({
       params: { search: "fender" },
     });
-    expect(metadata.title).toEqual(
-      "Mercado Libre - Resultados para fender"
-    );
+    expect(metadata.title).toEqual("Mercado Libre - Resultados para fender");
     expect(metadata.description).toEqual(
       "Encuentra los mejores productos para fender en Mercado Libre."
     );
@@ -52,7 +63,7 @@ describe("fetchResults", () => {
   });
 
   it("Throws an error on fetch failure", async () => {
-    global.fetch.mockImplementationOnce(() =>
+    (global.fetch as jest.Mock).mockImplementationOnce(() =>
       Promise.reject(new Error("Failed to fetch"))
     );
     await expect(fetchResults("unknown")).rejects.toThrow(
@@ -67,19 +78,23 @@ describe("ItemsPage Component", () => {
     await waitFor(() =>
       expect(screen.getByText("Sample Item")).toBeInTheDocument()
     );
-    expect(screen.queryByText("No hay resultados, intenta con otro termino")).not.toBeInTheDocument();
+    expect(
+      screen.queryByText("No hay resultados, intenta con otro termino")
+    ).not.toBeInTheDocument();
   });
 
   it("Displays no results", async () => {
-    global.fetch.mockImplementationOnce(() =>
+    (global.fetch as jest.Mock).mockImplementationOnce(() =>
       Promise.resolve({
         json: () => Promise.resolve({}),
       })
     );
-    
+
     render(await ItemsPage({ searchParams: { search: "" } }));
     await waitFor(() =>
-      expect(screen.getByText("No hay resultados, intenta con otro termino")).toBeInTheDocument()
+      expect(
+        screen.getByText("No hay resultados, intenta con otro termino")
+      ).toBeInTheDocument()
     );
   });
 });

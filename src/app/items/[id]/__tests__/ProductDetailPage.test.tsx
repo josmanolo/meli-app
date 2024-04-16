@@ -2,28 +2,34 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { jest } from "@jest/globals";
 import ProductDetailPage, { generateMetadata, getItem } from "../page";
 
-jest.mock("next/image", () => ({
-  __esModule: true,
-  default: () => {
-    return "Next image";
-  },
-}));
-
-global.fetch = jest.fn(() =>
-  Promise.resolve({
-    json: () =>
-      Promise.resolve({
-        item: {
-          id: "1",
-          title: "Guitarra Fender",
-          price: { amount: 1000, currency: "USD" },
-          picture: "/path/to/guitar.jpg",
-          condition: "new",
-          description: "Descripción de la Guitarra Fender",
-          categories_path: ["Música", "Instrumentos", "Guitarras"],
-        },
-      }),
-  })
+global.fetch = jest.fn(
+  () =>
+    Promise.resolve({
+      ok: true,
+      status: 200,
+      statusText: "OK",
+      headers: new Headers(),
+      redirected: false,
+      type: "default",
+      url: "",
+      text: () => Promise.resolve(""),
+      blob: () => Promise.resolve(new Blob()),
+      clone: () => this,
+      body: null,
+      bodyUsed: false,
+      json: () =>
+        Promise.resolve({
+          item: {
+            id: "1",
+            title: "Guitarra Fender",
+            price: { amount: 1000, currency: "USD" },
+            picture: "/path/to/guitar.jpg",
+            condition: "new",
+            description: "Descripción de la Guitarra Fender",
+            categories_path: ["Música", "Instrumentos", "Guitarras"],
+          },
+        }),
+    }) as unknown as Promise<Response>
 );
 
 describe("generateMetadata Function", () => {
@@ -69,7 +75,7 @@ describe("ProductDetailPage", () => {
   });
 
   it("Renders fallback content when data is missing", async () => {
-    global.fetch.mockImplementationOnce(() =>
+    (global.fetch as jest.Mock).mockImplementationOnce(() =>
       Promise.resolve({
         json: () => Promise.resolve({}),
       })
